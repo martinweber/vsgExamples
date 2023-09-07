@@ -19,6 +19,16 @@ int main(int argc, char** argv)
 
     std::cout << (dylib->is_compatible(local->type_hash()) ? "types are compatible" : "types are not compatible") << std::endl;
 
+    std::cout << "Standalone type_hash<vsg::MatrixTransform>() template function result: " << vsg::type_hash<vsg::MatrixTransform>() << std::endl;
+
+    assert(dylib->is_compatible(vsg::type_hash<vsg::MatrixTransform>()));
+    assert(dylib->is_compatible(vsg::type_hash<vsg::Transform>()));
+    assert(dylib->is_compatible(vsg::type_hash<vsg::Group>()));
+    assert(dylib->is_compatible(vsg::type_hash<vsg::Node>()));
+    assert(dylib->is_compatible(vsg::type_hash<vsg::Object>()));
+
+    assert(not dylib->is_compatible(vsg::type_hash<vsg::Camera>()));
+
     // this dynamic_cast will result in the following clang_typeid runtime error when executed with debugger attached:
     // clang_typeid[30194:379372] dynamic_cast error 2: One or more of the following type_info's has hidden visibility or is defined
     // in more than one translation unit. They should all have public visibility. N3vsg6ObjectE, N3vsg15MatrixTransformE, N3vsg15MatrixTransformE.
