@@ -44,7 +44,7 @@ public:
 
         for (auto itr = gp->pipelineStates.begin(); itr != gp->pipelineStates.end(); ++itr)
         {
-            if ((*itr)->is_compatible(typeid(vsg::ColorBlendState)))
+            if ((*itr)->is_compatible(vsg::type_hash<vsg::ColorBlendState>()))
             {
                 auto colorBlendState = itr->cast<vsg::ColorBlendState>();
 
